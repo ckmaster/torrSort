@@ -1,0 +1,9 @@
+c:\users\ckidd\documents\visual studio 2015\Projects\torrSort_CS\torrSort_CS\bin\Debug\torrSort_CS.exe.config
+c:\users\ckidd\documents\visual studio 2015\Projects\torrSort_CS\torrSort_CS\bin\Debug\torrSort_CS.exe
+c:\users\ckidd\documents\visual studio 2015\Projects\torrSort_CS\torrSort_CS\bin\Debug\torrSort_CS.pdb
+c:\users\ckidd\documents\visual studio 2015\Projects\torrSort_CS\torrSort_CS\obj\Debug\torrSort_CS.csprojResolveAssemblyReference.cache
+c:\users\ckidd\documents\visual studio 2015\Projects\torrSort_CS\torrSort_CS\obj\Debug\torrSort_CS.Properties.Resources.resources
+c:\users\ckidd\documents\visual studio 2015\Projects\torrSort_CS\torrSort_CS\obj\Debug\torrSort_CS.csproj.GenerateResource.Cache
+c:\users\ckidd\documents\visual studio 2015\Projects\torrSort_CS\torrSort_CS\obj\Debug\torrSort_CS.exe
+c:\users\ckidd\documents\visual studio 2015\Projects\torrSort_CS\torrSort_CS\obj\Debug\torrSort_CS.pdb
+c:\users\ckidd\documents\visual studio 2015\Projects\torrSort_CS\torrSort_CS\obj\Debug\torrSort_CS.MyForm.resources

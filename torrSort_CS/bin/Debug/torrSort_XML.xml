@@ -1,0 +1,14 @@
+<Xml>
+	<Rules>
+		<searchPattern>Game*Of*Thrones*S06*</searchPattern>
+		<destFolder>C:\TheDestination\The Other Show Season 1\</destFolder>
+	</Rules>
+	<Rules>
+		<searchPattern>The.Show.S01*</searchPattern>
+		<destFolder>C:\TheDestination\The Show Season 1\</destFolder>
+	</Rules>
+	<Rules>
+		<searchPattern>tester*</searchPattern>
+		<destFolder>C:\TheDestination\TESTCRAP\</destFolder>
+	</Rules>
+</Xml>
