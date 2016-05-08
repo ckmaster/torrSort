@@ -1,0 +1,10 @@
+c:\users\ckidd\documents\visual studio 2015\Projects\torrSort_Test\torrSort_Test\bin\Debug\torrSort_Test.exe.config
+c:\users\ckidd\documents\visual studio 2015\Projects\torrSort_Test\torrSort_Test\obj\Debug\torrSort_Test.Resources.resources
+c:\users\ckidd\documents\visual studio 2015\Projects\torrSort_Test\torrSort_Test\obj\Debug\torrSort_Test.vbproj.GenerateResource.Cache
+c:\users\ckidd\documents\visual studio 2015\Projects\torrSort_Test\torrSort_Test\obj\Debug\torrSort_Test.xml
+C:\Users\ckidd\Documents\Visual Studio 2015\Projects\torrSort_Test\torrSort_Test\bin\Debug\torrSort_Test.exe
+C:\Users\ckidd\Documents\Visual Studio 2015\Projects\torrSort_Test\torrSort_Test\bin\Debug\torrSort_Test.pdb
+C:\Users\ckidd\Documents\Visual Studio 2015\Projects\torrSort_Test\torrSort_Test\bin\Debug\torrSort_Test.xml
+C:\Users\ckidd\Documents\Visual Studio 2015\Projects\torrSort_Test\torrSort_Test\obj\Debug\torrSort_Test.exe
+C:\Users\ckidd\Documents\Visual Studio 2015\Projects\torrSort_Test\torrSort_Test\obj\Debug\torrSort_Test.pdb
+C:\Users\ckidd\Documents\Visual Studio 2015\Projects\torrSort_Test\torrSort_Test\obj\Debug\torrSort_Test.vbprojResolveAssemblyReference.cache
