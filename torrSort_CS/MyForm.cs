@@ -189,51 +189,31 @@ namespace torrSort_CS
 
         private void backgroundWorker1_DoWork (object sender, DoWorkEventArgs e)
         {
-            var rulesXML = System.Xml.Linq.XDocument.Load(torrXML);
-            List<string> rulesList = new List<string>();
-            foreach (XElement xe in rulesXML.Descendants("Rules"))
+            //loads the xml file
+            XElement rulesXML = XElement.Load(torrXML);
+            //creates a traversible collection of xml elements
+            IEnumerable<XElement> rules = from x in rulesXML.Elements() select x;
+            string[] filesToMove = Directory.GetFiles(sourceDir);
+
+            //traverses the collection of xml elements to work with the nodes that are needed
+            foreach (XElement x in rules)
             {
-                rulesList.Add(xe.Value);
-            }
-
-            foreach (string s in rulesList)
-            {
-                //Need revised
-                //Can not handle '*' in the filename
-                string[] tempArr = s.Split('*');
-                string rule = tempArr[0];
-                string dest = tempArr[1];
-
-                var sourceFiles = Directory.EnumerateFiles(sourceDir, rule + "*", SearchOption.AllDirectories);
-                List<string> sourceFilesString = new List<string>();
-
-                //This makes the list static, so the next loop doesn't error on a file that was already moved
-                foreach (string t in sourceFiles)
+                string destFolder = x.Element("destFolder").Value;
+                string searchPattern = x.Element("searchPattern").Value;
+                if (!Directory.Exists(destFolder))
                 {
-                    sourceFilesString.Add(t);
+                    Directory.CreateDirectory(destFolder);
                 }
 
-                foreach (string t in sourceFilesString)
+                foreach (string s in filesToMove)
                 {
-                    string fileName = Path.GetFileName(t);
-                    //Change so that it first checks if the source file exists
-                    if (File.Exists(dest + fileName))
-                    {
-                        MessageBox.Show("File already exists in destination:    " + dest + fileName + "\r\n\r\nRemove the file from your source directory." + Environment.NewLine + "Click OK to continue running rules . . .");
-                        continue;
-                    }
-                    else
-                    {
-                        //File.Move(t, dest + fileName);
-                        Microsoft.VisualBasic.FileIO.FileSystem.MoveFile(t, dest+fileName, Microsoft.VisualBasic.FileIO.UIOption.AllDialogs);
-                    }
+                    string fileName = Path.GetFileName(s);
+                    Microsoft.VisualBasic.FileIO.FileSystem.MoveFile(s, destFolder + fileName, Microsoft.VisualBasic.FileIO.UIOption.AllDialogs);
                 }
             }
-        }//end backgroundWorker1_DoWork
-
-        private void backgroundWorker1_ProgressChanged (object sender, ProgressChangedEventArgs e)
-        {
 
         }
     }
-}
+        //end backgroundWorker1_DoWork
+    }
+//}

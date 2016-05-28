@@ -1,6 +1,6 @@
 <Xml>
 	<Rules>
-		<searchPattern>Game*Of*Thrones*S06*</searchPattern>
+		<searchPattern>*Game*Of*Thrones*S06*</searchPattern>
 		<destFolder>C:\TheDestination\The Other Show Season 1\</destFolder>
 	</Rules>
 	<Rules>
