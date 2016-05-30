@@ -57,7 +57,7 @@ namespace torrSort_CS
 
         private void MyForm_Load (object sender, EventArgs e)
         {
-         
+
         }
 
         private void FileMenu_Click (object sender, EventArgs e)
@@ -93,17 +93,17 @@ namespace torrSort_CS
         }
         //end FileMenu_Click
 
-        public static void GetFilesRecursive(List<string> initial)
+        public static void GetFilesRecursive (List<string> initial)
         {
             List<string> result = new List<string>();
             Stack<string> stack = new Stack<string>();
 
-            foreach(string s in initial)
+            foreach (string s in initial)
             {
                 stack.Push(s);
             }
-            
-            while(stack.Count > 0)
+
+            while (stack.Count > 0)
             {
                 string tempDir = stack.Pop();
                 try
@@ -120,13 +120,12 @@ namespace torrSort_CS
         }
         //end GetFilesRecursive
 
-        public void Grabber()
+        public void Grabber ()
         {
             try
             {
-                string[] files = Directory.GetFiles(sourceDir,"*", SearchOption.AllDirectories);
+                string[] files = Directory.GetFiles(sourceDir, "*", SearchOption.AllDirectories);
 
-                //Get rid of this in favor of a replace for filesLocated
                 if (File.Exists(filesLocated))
                 {
                     File.Delete(filesLocated);
@@ -137,7 +136,7 @@ namespace torrSort_CS
                     MessageBox.Show("No files in source directory: " + sourceDir);
                 }
 
-                foreach(string s in files)
+                foreach (string s in files)
                 {
                     File.AppendAllText((filesLocated), "\r\n" + s);
                 }
@@ -145,11 +144,11 @@ namespace torrSort_CS
             catch (Exception e)
             {
                 MessageBox.Show(e.ToString() + "\r\n\r\nCould not find source directory.");
-            } 
+            }
         }
         //end Grabber
 
-        public void RuleRunner()
+        public void RuleRunner ()
         {
             backgroundWorker1.RunWorkerAsync(null);
         }
@@ -189,31 +188,62 @@ namespace torrSort_CS
 
         private void backgroundWorker1_DoWork (object sender, DoWorkEventArgs e)
         {
-            //loads the xml file
-            XElement rulesXML = XElement.Load(torrXML);
-            //creates a traversible collection of xml elements
-            IEnumerable<XElement> rules = from x in rulesXML.Elements() select x;
-            string[] filesToMove = Directory.GetFiles(sourceDir);
+            List<Rule> rules = GetRules();
+            foreach (Rule r in rules)
+            {
+                CheckFileExist(r, sourceDir);
+                //if (fileExist)
+                //{
+                //    MessageBox.Show("sopmetndhwabdjkwa");
+                //}
+                //else
+                //{
+                //    Microsoft.VisualBasic.FileIO.FileSystem.MoveFile(s, r.destFolder + fileName, Microsoft.VisualBasic.FileIO.UIOption.AllDialogs);     
+                //} 
+            }
+        }
+        //end backgroundWorker1_DoWork
 
-            //traverses the collection of xml elements to work with the nodes that are needed
-            foreach (XElement x in rules)
+        public static void CheckFileExist (Rule rule, string source)
+        {
+            string[] destFiles = Directory.GetFiles(rule.destFolder);
+            string[] sourceFiles = Directory.GetFiles(source);
+            foreach (string s in destFiles)
+            {
+                string destFileName = Path.GetFileName(s);
+                foreach (string t in sourceFiles)
+                {
+                    string sourceFileName = Path.GetFileName(t);
+                    if (destFileName.Equals(sourceFileName))
+                    {
+                        MessageBox.Show("Source File:\t" + sourceFileName + "\r\nDestination File:\t" + destFileName);
+                        return;
+                    }
+                    else
+                    {
+                        Microsoft.VisualBasic.FileIO.FileSystem.MoveFile(t, rule.destFolder + sourceFileName, Microsoft.VisualBasic.FileIO.UIOption.AllDialogs);
+                    }
+                }
+            }
+        }
+
+        public static List<Rule> GetRules ()
+        {
+            List<Rule> toReturn = new List<Rule>();
+            XElement rulesXML = XElement.Load(torrXML);
+            IEnumerable<XElement> rules = from x in rulesXML.Elements() select x;
+
+            foreach(XElement x in rules)
             {
                 string destFolder = x.Element("destFolder").Value;
                 string searchPattern = x.Element("searchPattern").Value;
-                if (!Directory.Exists(destFolder))
-                {
-                    Directory.CreateDirectory(destFolder);
-                }
-
-                foreach (string s in filesToMove)
-                {
-                    string fileName = Path.GetFileName(s);
-                    Microsoft.VisualBasic.FileIO.FileSystem.MoveFile(s, destFolder + fileName, Microsoft.VisualBasic.FileIO.UIOption.AllDialogs);
-                }
+                toReturn.Add(new Rule(destFolder, searchPattern));
             }
-
+            return toReturn;
         }
+        //end GetRules
+
     }
-        //end backgroundWorker1_DoWork
-    }
-//}
+    //end class MyForm
+}
+//end namespace torrSort_CS
