@@ -191,41 +191,22 @@ namespace torrSort_CS
             List<Rule> rules = GetRules();
             foreach (Rule r in rules)
             {
-                CheckFileExist(r, sourceDir);
-                //if (fileExist)
-                //{
-                //    MessageBox.Show("sopmetndhwabdjkwa");
-                //}
-                //else
-                //{
-                //    Microsoft.VisualBasic.FileIO.FileSystem.MoveFile(s, r.destFolder + fileName, Microsoft.VisualBasic.FileIO.UIOption.AllDialogs);     
-                //} 
-            }
-        }
-        //end backgroundWorker1_DoWork
-
-        public static void CheckFileExist (Rule rule, string source)
-        {
-            string[] destFiles = Directory.GetFiles(rule.destFolder);
-            string[] sourceFiles = Directory.GetFiles(source);
-            foreach (string s in destFiles)
-            {
-                string destFileName = Path.GetFileName(s);
-                foreach (string t in sourceFiles)
+                string[] filesToMove = Directory.GetFiles(sourceDir, r.searchPattern, SearchOption.AllDirectories);
+                foreach(string s in filesToMove)
                 {
-                    string sourceFileName = Path.GetFileName(t);
-                    if (destFileName.Equals(sourceFileName))
+                    string fileName = Path.GetFileName(s);
+                    if (File.Exists(r.destFolder + fileName))
                     {
-                        MessageBox.Show("Source File:\t" + sourceFileName + "\r\nDestination File:\t" + destFileName);
-                        return;
+                        MessageBox.Show("File already exists in destination:    " + fileName + "\r\nRemove the file from your source directory\r\nClick OK to continue running rules . . .");
                     }
                     else
                     {
-                        Microsoft.VisualBasic.FileIO.FileSystem.MoveFile(t, rule.destFolder + sourceFileName, Microsoft.VisualBasic.FileIO.UIOption.AllDialogs);
+                        Microsoft.VisualBasic.FileIO.FileSystem.MoveFile(s, r.destFolder + fileName, Microsoft.VisualBasic.FileIO.UIOption.AllDialogs);
                     }
                 }
             }
         }
+        //end backgroundWorker1_DoWork
 
         public static List<Rule> GetRules ()
         {
